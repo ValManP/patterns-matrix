@@ -1,27 +1,27 @@
 package edu.university.matrix.impl;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.errorhandling.MatrixOperationException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class LowerTriangularMatrixTest {
-    private IMatrix matrix;
+    private AbstractMatrix matrix;
+    private AbstractDrawer drawer;
 
     @Before
     public void setUp() {
         int size = 10;
-        matrix = new Matrix(size);
+        matrix = new Matrix(size, drawer);
         matrix.setValue(2, 1, 10.0);
     }
 
     @Test
     public void testGetN() {
         // Arrange
-        IMatrix lowerTriangular = new LowerTriangularMatrix(matrix);
+        AbstractMatrix lowerTriangular = new LowerTriangularMatrix(matrix, drawer);
 
         // Act & Assert
         int expected = 10;
@@ -31,7 +31,7 @@ public class LowerTriangularMatrixTest {
     @Test
     public void testGetUpperValue() {
         // Arrange
-        IMatrix lowerTriangular = new LowerTriangularMatrix(matrix);
+        AbstractMatrix lowerTriangular = new LowerTriangularMatrix(matrix, drawer);
 
         // Act & Assert
         double expected = 0.0;
@@ -41,7 +41,7 @@ public class LowerTriangularMatrixTest {
     @Test
     public void testGetLowerValue() {
         // Arrange
-        IMatrix lowerTriangular = new LowerTriangularMatrix(matrix);
+        AbstractMatrix lowerTriangular = new LowerTriangularMatrix(matrix, drawer);
 
         // Act & Assert
         double expected = 10.0;
@@ -51,7 +51,7 @@ public class LowerTriangularMatrixTest {
     @Test
     public void testSetValue() {
         // Arrange
-        IMatrix lowerTriangular = new LowerTriangularMatrix(matrix);
+        AbstractMatrix lowerTriangular = new LowerTriangularMatrix(matrix, drawer);
 
         // Act
         lowerTriangular.setValue(1, 1, 20.0);
@@ -64,7 +64,7 @@ public class LowerTriangularMatrixTest {
     @Test
     public void testGetComponent() {
         // Arrange
-        IMatrix lowerTriangular = new LowerTriangularMatrix(matrix);
+        AbstractMatrix lowerTriangular = new LowerTriangularMatrix(matrix, drawer);
 
         // Act & Assert
         Assert.assertTrue(lowerTriangular.getComponent() instanceof Matrix);
@@ -73,7 +73,7 @@ public class LowerTriangularMatrixTest {
     @Test(expected = MatrixOperationException.class)
     public void testSetInUpperTriangular() {
         // Arrange
-        IMatrix lowerTriangular = new LowerTriangularMatrix(matrix);
+        AbstractMatrix lowerTriangular = new LowerTriangularMatrix(matrix, drawer);
 
         // Act & Assert
         lowerTriangular.setValue(0, 1, 10.0);

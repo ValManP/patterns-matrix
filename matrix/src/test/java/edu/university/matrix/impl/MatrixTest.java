@@ -1,16 +1,19 @@
 package edu.university.matrix.impl;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.errorhandling.MatrixOperationException;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class MatrixTest {
+    private AbstractDrawer drawer;
+
     @Test
     public void testCreate() {
         // Arrange
         int n = 10;
-        IMatrix matrix = new Matrix(n);
+        AbstractMatrix matrix = new Matrix(n, drawer);
 
         // Act & Assert
         Assert.assertNotNull(matrix);
@@ -20,7 +23,7 @@ public class MatrixTest {
     public void testGetN() {
         // Arrange
         int n = 10;
-        IMatrix matrix = new Matrix(n);
+        AbstractMatrix matrix = new Matrix(n, drawer);
 
         // Act & Assert
         Assert.assertEquals(n, matrix.getN());
@@ -30,7 +33,7 @@ public class MatrixTest {
     public void testSetAndGetValue() {
         // Arrange
         int n = 10;
-        IMatrix matrix = new Matrix(n);
+        AbstractMatrix matrix = new Matrix(n, drawer);
         matrix.setValue(1, 1, 10.0);
 
         // Act & Assert
@@ -42,7 +45,7 @@ public class MatrixTest {
     public void testSetToInvalidIndex() {
         // Arrange
         int n = 10;
-        IMatrix matrix = new Matrix(n);
+        AbstractMatrix matrix = new Matrix(n, drawer);
         matrix.setValue(-1, 1, 10.0);
     }
 
@@ -50,7 +53,7 @@ public class MatrixTest {
     public void testGetToInvalidIndex() {
         // Arrange
         int n = 10;
-        IMatrix matrix = new Matrix(n);
+        AbstractMatrix matrix = new Matrix(n, drawer);
         matrix.getValue(-1, 1);
     }
 
@@ -58,7 +61,7 @@ public class MatrixTest {
     public void testEmptyComponent() {
         // Arrange
         int n = 10;
-        IMatrix minor = new Matrix(n);
+        AbstractMatrix minor = new Matrix(n, drawer);
 
         // Act & Assert
         Assert.assertTrue(minor.getComponent() instanceof Matrix);
@@ -68,6 +71,6 @@ public class MatrixTest {
     public void testInvalidSize() {
         // Arrange
         int n = -10;
-        IMatrix matrix = new Matrix(n);
+        AbstractMatrix matrix = new Matrix(n, drawer);
     }
 }

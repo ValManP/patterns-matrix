@@ -1,24 +1,26 @@
 package edu.university.matrix.impl;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class TransposeMatrixTest {
-    private IMatrix matrix;
+    private AbstractMatrix matrix;
+    private AbstractDrawer drawer;
 
     @Before
     public void setUp() {
         int size = 10;
-        matrix = new Matrix(size);
+        matrix = new Matrix(size, drawer);
         matrix.setValue(1, 8, 10.0);
     }
 
     @Test
     public void testGetN() {
         // Arrange
-        IMatrix transpose = new TransposeMatrix(matrix);
+        AbstractMatrix transpose = new TransposeMatrix(matrix, drawer);
 
         // Act & Assert
         int expected = 10;
@@ -28,7 +30,7 @@ public class TransposeMatrixTest {
     @Test
     public void testGetValue() {
         // Arrange
-        IMatrix transpose = new TransposeMatrix(matrix);
+        AbstractMatrix transpose = new TransposeMatrix(matrix, drawer);
 
         // Act & Assert
         double expected = 10.0;
@@ -38,7 +40,7 @@ public class TransposeMatrixTest {
     @Test
     public void testSetValue() {
         // Arrange
-        IMatrix transpose = new TransposeMatrix(matrix);
+        AbstractMatrix transpose = new TransposeMatrix(matrix, drawer);
 
         // Act
         transpose.setValue(0, 1, 20.0);
@@ -51,7 +53,7 @@ public class TransposeMatrixTest {
     @Test
     public void testGetComponent() {
         // Arrange
-        IMatrix transpose = new TransposeMatrix(matrix);
+        AbstractMatrix transpose = new TransposeMatrix(matrix, drawer);
 
         // Act & Assert
         Assert.assertTrue(transpose.getComponent() instanceof Matrix);

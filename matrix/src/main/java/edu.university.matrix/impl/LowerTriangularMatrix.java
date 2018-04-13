@@ -1,12 +1,12 @@
 package edu.university.matrix.impl;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.errorhandling.MatrixOperationException;
 
-public class LowerTriangularMatrix implements IMatrix {
-    private IMatrix component;
-
-    public LowerTriangularMatrix(IMatrix component) {
+public class LowerTriangularMatrix extends AbstractMatrix {
+    public LowerTriangularMatrix(AbstractMatrix component, AbstractDrawer drawer) {
+        super(drawer);
         this.component = component;
     }
 
@@ -33,7 +33,7 @@ public class LowerTriangularMatrix implements IMatrix {
     }
 
     @Override
-    public IMatrix getComponent() {
+    public AbstractMatrix getComponent() {
         return component;
     }
 }

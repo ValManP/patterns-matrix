@@ -1,11 +1,11 @@
 package edu.university.matrix.impl;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 
-public class TransposeMatrix implements IMatrix {
-    private IMatrix component;
-
-    public TransposeMatrix(IMatrix component) {
+public class TransposeMatrix extends AbstractMatrix {
+    public TransposeMatrix(AbstractMatrix component, AbstractDrawer drawer) {
+        super(drawer);
         this.component = component;
     }
 
@@ -25,7 +25,7 @@ public class TransposeMatrix implements IMatrix {
     }
 
     @Override
-    public IMatrix getComponent() {
+    public AbstractMatrix getComponent() {
         return component;
     }
 }

@@ -1,6 +1,7 @@
 package edu.university.matrix.decorator;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.impl.LowerTriangularMatrix;
 import edu.university.matrix.impl.Matrix;
 import edu.university.matrix.impl.MinorMatrix;
@@ -10,12 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class MatrixDecoratorTest {
-    private IMatrix matrix;
+    private AbstractMatrix matrix;
+    private AbstractDrawer drawer;
 
     @Before
     public void setUp() {
         int size = 3;
-        matrix = new Matrix(size);
+        matrix = new Matrix(size, drawer);
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 matrix.setValue(i, j, i * i + j);
@@ -26,9 +28,9 @@ public class MatrixDecoratorTest {
     @Test
     public void testTransposeLowerTriangularMinor() {
         // Arrange
-        IMatrix m = new TransposeMatrix(matrix);
-        m = new LowerTriangularMatrix(m);
-        m = new MinorMatrix(m, 0, 2);
+        AbstractMatrix m = new TransposeMatrix(matrix, drawer);
+        m = new LowerTriangularMatrix(m, drawer);
+        m = new MinorMatrix(drawer, m, 0, 2);
 
         // Act & Assert
         double expected = 2.0;
@@ -38,8 +40,8 @@ public class MatrixDecoratorTest {
     @Test
     public void testTransposeMinor() {
         // Arrange
-        IMatrix m = new TransposeMatrix(matrix);
-        m = new MinorMatrix(m, 1, 2);
+        AbstractMatrix m = new TransposeMatrix(matrix, drawer);
+        m = new MinorMatrix(drawer, m, 1, 2);
 
         // Act & Assert
         double expected = 5.0;
@@ -49,8 +51,8 @@ public class MatrixDecoratorTest {
     @Test
     public void testLowerTriangularMinor() {
         // Arrange
-        IMatrix m = new LowerTriangularMatrix(matrix);
-        m = new MinorMatrix(m, 1, 2);
+        AbstractMatrix m = new LowerTriangularMatrix(matrix, drawer);
+        m = new MinorMatrix(drawer, m, 1, 2);
 
         // Act & Assert
         double expected = 6.0;
@@ -61,8 +63,8 @@ public class MatrixDecoratorTest {
     @Test
     public void testLowerTriangularTranspose() {
         // Arrange
-        IMatrix m = new LowerTriangularMatrix(matrix);
-        m = new TransposeMatrix(m);
+        AbstractMatrix m = new LowerTriangularMatrix(matrix, drawer);
+        m = new TransposeMatrix(m, drawer);
 
         // Act & Assert
         double expected = 4.0;
@@ -73,8 +75,8 @@ public class MatrixDecoratorTest {
     @Test
     public void testMinorLowerTriangular() {
         // Arrange
-        IMatrix m = new MinorMatrix(matrix, 0, 2);
-        m = new LowerTriangularMatrix(m);
+        AbstractMatrix m = new MinorMatrix(drawer, matrix, 0, 2);
+        m = new LowerTriangularMatrix(m, drawer);
 
         // Act & Assert
         double expected = 4.0;
@@ -85,10 +87,10 @@ public class MatrixDecoratorTest {
     @Test
     public void testUndecorate() {
         // Arrange
-        IMatrix m = new TransposeMatrix(matrix);
-        m = new LowerTriangularMatrix(m);
-        IMatrix save = m;
-        m = new MinorMatrix(m, 0, 2);
+        AbstractMatrix m = new TransposeMatrix(matrix, drawer);
+        m = new LowerTriangularMatrix(m, drawer);
+        AbstractMatrix save = m;
+        m = new MinorMatrix(drawer, m, 0, 2);
 
         // Act & Assert
         double expected = 2.0;

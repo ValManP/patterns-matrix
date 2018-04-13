@@ -1,25 +1,27 @@
 package edu.university.matrix.impl;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.errorhandling.MatrixOperationException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class MinorMatrixTest {
-    private IMatrix matrix;
+    private AbstractMatrix matrix;
+    private AbstractDrawer drawer;
 
     @Before
     public void setUp() {
         int size = 10;
-        matrix = new Matrix(size);
+        matrix = new Matrix(size, drawer);
         matrix.setValue(1, 8, 10.0);
     }
 
     @Test
     public void testGetN() {
         // Arrange
-        IMatrix minor = new MinorMatrix(matrix, 1, 3, 8);
+        AbstractMatrix minor = new MinorMatrix(drawer, matrix, 1, 3, 8);
 
         // Act & Assert
         int expected = 3;
@@ -29,7 +31,7 @@ public class MinorMatrixTest {
     @Test
     public void testGetValue() {
         // Arrange
-        IMatrix minor = new MinorMatrix(matrix, 1, 3, 8);
+        AbstractMatrix minor = new MinorMatrix(drawer, matrix, 1, 3, 8);
 
         // Act & Assert
         double expected = 10.0;
@@ -39,7 +41,7 @@ public class MinorMatrixTest {
     @Test
     public void testSetValue() {
         // Arrange
-        IMatrix minor = new MinorMatrix(matrix, 1, 3, 8);
+        AbstractMatrix minor = new MinorMatrix(drawer, matrix, 1, 3, 8);
 
         // Act
         minor.setValue(0, 1, 20.0);
@@ -52,7 +54,7 @@ public class MinorMatrixTest {
     @Test
     public void testGetComponent() {
         // Arrange
-        IMatrix minor = new MinorMatrix(matrix, 1, 3, 8);
+        AbstractMatrix minor = new MinorMatrix(drawer, matrix, 1, 3, 8);
 
         // Act & Assert
         Assert.assertTrue(minor.getComponent() instanceof Matrix);
@@ -61,7 +63,7 @@ public class MinorMatrixTest {
     @Test
     public void testEmptyMinor() {
         // Arrange
-        IMatrix minor = new MinorMatrix(matrix);
+        AbstractMatrix minor = new MinorMatrix(drawer, matrix);
 
         // Act & Assert
         Assert.assertTrue(minor.getComponent() instanceof Matrix);
@@ -70,7 +72,7 @@ public class MinorMatrixTest {
     @Test
     public void testUnsortedRows() {
         // Arrange
-        IMatrix minor = new MinorMatrix(matrix, 3, 1, 8);
+        AbstractMatrix minor = new MinorMatrix(drawer, matrix, 3, 1, 8);
 
         // Act
         minor.setValue(0, 1, 20.0);
@@ -83,7 +85,7 @@ public class MinorMatrixTest {
     @Test(expected = MatrixOperationException.class)
     public void testGetByInvalidIndex() {
         // Arrange
-        IMatrix minor = new MinorMatrix(matrix, 1, 3, 8);
+        AbstractMatrix minor = new MinorMatrix(drawer, matrix, 1, 3, 8);
 
         minor.getValue(0, 3);
     }
@@ -91,7 +93,7 @@ public class MinorMatrixTest {
     @Test(expected = MatrixOperationException.class)
     public void testSetByInvalidIndex() {
         // Arrange
-        IMatrix minor = new MinorMatrix(matrix, 1, 3, 8);
+        AbstractMatrix minor = new MinorMatrix(drawer, matrix, 1, 3, 8);
 
         // Act
         minor.setValue(3, -1, 20.0);

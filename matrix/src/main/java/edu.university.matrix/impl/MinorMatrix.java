@@ -1,15 +1,17 @@
 package edu.university.matrix.impl;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.errorhandling.MatrixOperationException;
 
 import java.util.Arrays;
 
-public class MinorMatrix implements IMatrix {
-    private IMatrix component;
+public class MinorMatrix extends AbstractMatrix {
     private int[] items;
 
-    public MinorMatrix(IMatrix component, int... rows) {
+    public MinorMatrix(AbstractDrawer drawer, AbstractMatrix component, int... rows) {
+        super(drawer);
+
         this.items = new int[rows.length];
         for (int i = 0; i < rows.length; i++) {
             items[i] = rows[i];
@@ -42,7 +44,7 @@ public class MinorMatrix implements IMatrix {
     }
 
     @Override
-    public IMatrix getComponent() {
+    public AbstractMatrix getComponent() {
         return component;
     }
 }

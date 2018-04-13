@@ -1,13 +1,16 @@
 package edu.university.matrix.impl;
 
-import edu.university.matrix.IMatrix;
+import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.errorhandling.MatrixOperationException;
 
-public class Matrix implements IMatrix {
+public class Matrix extends AbstractMatrix {
     private int size;
     private double[][] values;
 
-    public Matrix(int n) {
+    public Matrix(int n, AbstractDrawer drawer) {
+        super(drawer);
+
         if (n <= 0) {
             throw new MatrixOperationException("Invalid size of matrix");
         }
@@ -37,7 +40,7 @@ public class Matrix implements IMatrix {
     }
 
     @Override
-    public IMatrix getComponent() {
+    public AbstractMatrix getComponent() {
         return this;
     }
 }
