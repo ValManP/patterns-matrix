@@ -7,6 +7,7 @@ import edu.university.matrix.draw.api.impl.GraphicalContextDrawAPI;
 import edu.university.matrix.draw.api.impl.HTMLDrawAPI;
 import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.drawers.impl.MatrixDrawer;
+import edu.university.matrix.drawers.impl.SparseMatrixDrawer;
 import edu.university.matrix.impl.Matrix;
 import edu.university.matrix.impl.SparseMatrix;
 import org.junit.Assert;
@@ -65,7 +66,7 @@ public class MatrixDrawingTest {
         // Arrange
         int n = 10;
         IDrawAPI drawAPI = new ConsoleDrawAPI();
-        AbstractDrawer drawer = new MatrixDrawer(drawAPI);
+        AbstractDrawer drawer = new SparseMatrixDrawer(drawAPI);
         AbstractMatrix matrix = new SparseMatrix(n, drawer);
 
         // Act
@@ -80,7 +81,7 @@ public class MatrixDrawingTest {
         // Arrange
         int n = 10;
         IDrawAPI drawAPI = new GraphicalContextDrawAPI();
-        AbstractDrawer drawer = new MatrixDrawer(drawAPI);
+        AbstractDrawer drawer = new SparseMatrixDrawer(drawAPI);
         AbstractMatrix matrix = new SparseMatrix(n, drawer);
 
         // Act
@@ -95,7 +96,7 @@ public class MatrixDrawingTest {
         // Arrange
         int n = 10;
         IDrawAPI drawAPI = new HTMLDrawAPI();
-        AbstractDrawer drawer = new MatrixDrawer(drawAPI);
+        AbstractDrawer drawer = new SparseMatrixDrawer(drawAPI);
         AbstractMatrix matrix = new SparseMatrix(n, drawer);
 
         // Act
