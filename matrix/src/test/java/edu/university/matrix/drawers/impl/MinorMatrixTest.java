@@ -1,8 +1,10 @@
-package edu.university.matrix.impl;
+package edu.university.matrix.drawers.impl;
 
-import edu.university.matrix.AbstractMatrix;
+import edu.university.matrix.*;
 import edu.university.matrix.drawers.AbstractDrawer;
 import edu.university.matrix.errorhandling.MatrixOperationException;
+import edu.university.matrix.impl.Matrix;
+import edu.university.matrix.impl.MinorMatrix;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
