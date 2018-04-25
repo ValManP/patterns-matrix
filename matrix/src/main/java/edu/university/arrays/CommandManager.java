@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class ArrayManager {
-    private List<Double> array;
+public class CommandManager {
+    private static CommandManager instance;
     private Stack<Command> commandsHistory;
 
-    public ArrayManager() {
-        array = new ArrayList<>();
+    public static CommandManager getInstance() {
+        if (instance == null) {
+            instance = new CommandManager();
+        }
+        return instance;
+    }
+
+    private CommandManager() {
         commandsHistory = new Stack<>();
     }
 
@@ -26,9 +32,5 @@ public class ArrayManager {
         if (command != null) {
             command.undo();
         }
-    }
-
-    public List<Double> getArray() {
-        return array;
     }
 }

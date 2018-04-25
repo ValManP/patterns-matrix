@@ -1,26 +1,29 @@
 package edu.university.arrays.commands.impl;
 
-import edu.university.arrays.ArrayManager;
+import edu.university.arrays.CommandManager;
 import edu.university.arrays.commands.Command;
 
-public class InsertElementCommand extends Command {
+import java.util.List;
+
+public class InsertElementCommand implements Command {
+    private List<Double> array;
     private double value;
     private int position;
 
-    public InsertElementCommand(ArrayManager manager, int position, double value) {
-        super(manager);
+    public InsertElementCommand(List<Double> array, int position, double value) {
+        this.array = array;
         this.value = value;
         this.position = position;
     }
 
     @Override
     public boolean execute() {
-        manager.getArray().add(position, value);
+        array.add(position, value);
         return true;
     }
 
     @Override
     public void undo() {
-        manager.getArray().remove(position);
+        array.remove(position);
     }
 }

@@ -1,16 +1,17 @@
 package edu.university.arrays.commands.impl;
 
-import edu.university.arrays.ArrayManager;
+import edu.university.arrays.CommandManager;
 import edu.university.arrays.commands.Command;
 
-public class UndoCommand extends Command {
-    public UndoCommand(ArrayManager manager) {
-        super(manager);
+public class UndoCommand implements Command {
+    @Override
+    public boolean execute() {
+        CommandManager.getInstance().undo();
+        return false;
     }
 
     @Override
-    public boolean execute() {
-        manager.undo();
-        return false;
+    public void undo() {
+
     }
 }

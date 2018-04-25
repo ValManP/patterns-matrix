@@ -1,26 +1,28 @@
 package edu.university.arrays.commands.impl;
 
-import edu.university.arrays.ArrayManager;
 import edu.university.arrays.commands.Command;
 
-public class DeleteElementCommand extends Command {
+import java.util.List;
+
+public class DeleteElementCommand implements Command {
+    List<Double> array;
     private int position;
     private double value;
 
-    public DeleteElementCommand(ArrayManager manager, int position) {
-        super(manager);
+    public DeleteElementCommand(List<Double> array, int position) {
+        this.array = array;
         this.position = position;
     }
 
     @Override
     public boolean execute() {
-        this.value = manager.getArray().get(position);
-        manager.getArray().remove(position);
+        this.value = array.get(position);
+        array.remove(position);
         return true;
     }
 
     @Override
     public void undo() {
-        manager.getArray().add(position, value);
+        array.add(position, value);
     }
 }
