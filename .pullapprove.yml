@@ -1,3 +1,4 @@
 version: 3
+
 pullapprove_conditions:
-- "base.ref == 'master'"
+- "'WIP' not in title"
