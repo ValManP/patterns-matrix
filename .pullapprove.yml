@@ -3,7 +3,7 @@ version: 3
 pullapprove_conditions:
 - "'WIP' not in title"
 
-roups:
+groups:
   code:
     reviewers:
       users:
